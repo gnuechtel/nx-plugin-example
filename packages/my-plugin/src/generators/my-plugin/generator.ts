@@ -63,7 +63,7 @@ export default async function (tree: Tree, options: MyPluginGeneratorSchema) {
     sourceRoot: `${normalizedOptions.projectRoot}/src`,
     targets: {
       build: {
-        executor: 'my-org/my-plugin:build',
+        executor: '@my-org/my-plugin:build',
       },
     },
     tags: normalizedOptions.parsedTags,

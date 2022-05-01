@@ -8,8 +8,8 @@ import {
 describe('my-plugin e2e', () => {
   it('should create my-plugin', async () => {
     const plugin = uniq('my-plugin');
-    ensureNxProject('my-org/my-plugin', 'dist/packages/my-plugin');
-    await runNxCommandAsync(`generate my-org/my-plugin:my-plugin ${plugin}`);
+    ensureNxProject('@my-org/my-plugin', 'dist/packages/my-plugin');
+    await runNxCommandAsync(`generate @my-org/my-plugin:my-plugin ${plugin}`);
 
     const result = await runNxCommandAsync(`build ${plugin}`);
     expect(result.stdout).toContain('Executor ran');
@@ -18,9 +18,9 @@ describe('my-plugin e2e', () => {
   describe('--directory', () => {
     it('should create src in the specified directory', async () => {
       const plugin = uniq('my-plugin');
-      ensureNxProject('my-org/my-plugin', 'dist/packages/my-plugin');
+      ensureNxProject('@my-org/my-plugin', 'dist/packages/my-plugin');
       await runNxCommandAsync(
-        `generate my-org/my-plugin:my-plugin ${plugin} --directory subdir`
+        `generate @my-org/my-plugin:my-plugin ${plugin} --directory subdir`
       );
       expect(() =>
         checkFilesExist(`libs/subdir/${plugin}/src/index.ts`)
@@ -31,9 +31,9 @@ describe('my-plugin e2e', () => {
   describe('--tags', () => {
     it('should add tags to the project', async () => {
       const plugin = uniq('my-plugin');
-      ensureNxProject('my-org/my-plugin', 'dist/packages/my-plugin');
+      ensureNxProject('@my-org/my-plugin', 'dist/packages/my-plugin');
       await runNxCommandAsync(
-        `generate my-org/my-plugin:my-plugin ${plugin} --tags e2etag,e2ePackage`
+        `generate @my-org/my-plugin:my-plugin ${plugin} --tags e2etag,e2ePackage`
       );
       const project = readJson(`libs/${plugin}/project.json`);
       expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
